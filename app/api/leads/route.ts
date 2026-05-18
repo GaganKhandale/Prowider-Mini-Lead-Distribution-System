@@ -1,10 +1,9 @@
 export const dynamic = 'force-dynamic'
+
 import { NextRequest, NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/prisma'
 import { allocateProviders } from '@/lib/allocate'
 import { broadcastEvent } from '@/lib/sse'
-
-const prisma = new PrismaClient()
 
 export async function POST(req: NextRequest) {
     try {
@@ -37,7 +36,6 @@ export async function POST(req: NextRequest) {
                 { status: 409 }
             )
         }
-        // Log full error in terminal so you can see exactly what went wrong
         console.error('Lead creation error:', err?.message || err)
         return NextResponse.json(
             { error: err?.message || 'Internal server error' },
