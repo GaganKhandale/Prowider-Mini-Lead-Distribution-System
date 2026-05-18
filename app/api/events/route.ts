@@ -1,7 +1,9 @@
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
 import { NextRequest } from 'next/server'
 import { addClient, removeClient } from '@/lib/sse'
 
-export const runtime = 'nodejs'
+
 
 export async function GET(_req: NextRequest) {
     let send: (data: string) => void
